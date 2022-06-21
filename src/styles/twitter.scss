@@ -1,0 +1,70 @@
+.main-div {
+  display: flex;
+  margin: auto;
+  border: 1px dotted;
+  border-color: rgba(110, 110, 110, 0.5);
+  .avatar {
+    position: relative;
+    p {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      // background-color: darkgoldenrod;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .post {
+    padding: 0px 15px;
+    .head-tittle {
+      display: flex;
+      justify-content: space-between;
+      button {
+        width: 40px;
+        height: 40px;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        background-color: transparent;
+        font-size: 20px;
+        padding-bottom: 10px;
+      }
+      button:hover {
+        color: blue;
+        background-color: rgb(229, 229, 238);
+      }
+    }
+    .img-div {
+      img {
+        border-radius: 15px;
+        border: 1px dotted;
+        border-color: rgba(110, 110, 110, 0.5);
+      }
+    }
+    .comment-div {
+      display: flex;
+      justify-content: space-between;
+      padding-right: 20px;
+      p{
+        cursor: pointer;
+      }
+      .comment-p:hover{
+        color: blue;
+      }
+      .tweet-p:hover{
+        color: green;
+      }
+      .like-p:hover{
+        color: red;
+      }
+      .share-p:hover{
+        color: blue;
+      }
+    }
+  }
+}
+.main-div:hover {
+  background-color: rgba(223, 216, 207, 0.3);
+}
