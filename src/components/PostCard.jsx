@@ -17,11 +17,36 @@ function PostCard(props) {
   const [menuX, setMenuX] = useState("");
   const [menuY, setMenuY] = useState("");
   const menu = useRef();
+  const post = useRef();
+  const contextMenu = useRef();
+  const like = useRef();
+  const tweet = useRef();
+
+  useEffect(() => {
+    document.addEventListener("click", handleMenu);
+    return function cleanUp() {
+      document.removeEventListener("click", handleMenu);
+    };
+  });
 
   const handleMenu = (e) => {
-    if (menu.current.contains(e.target)) {
-      e.preventDefault();
-      setMenuClicked(true);
+    if (post.current.contains(e.target)) {
+      if (menu.current === e.target) {
+        setMenuClicked(true);
+      } else if (contextMenu.current === e.target) {
+        return;
+      } else if (like.current === e.target) {
+        setIsLike(!isLike);
+        setMenuClicked(false);
+      } else if (tweet.current === e.target) {
+        props.handlePostId(props.post.id);
+        setMenuClicked(false);
+      } else {
+        if (!menuClicked) {
+          props.handlePostId(props.post.id);
+        }
+        setMenuClicked(false);
+      }
     } else {
       setMenuClicked(false);
     }
@@ -32,15 +57,40 @@ function PostCard(props) {
     top: menuY,
     left: menuX,
   };
-
   return (
-    <div onClick={(e) => handleMenu(e)}>
-      {menuClicked && (
-        <article style={menuStyle}>
-          <button onClick={() => setIsLike(!isLike)}>
-            {isLike ? <AiFillLike /> : <AiOutlineLike />}
+    <div ref={post} className="all-posts">
+      {menuClicked && props.clickedMenuId === props.post.id && (
+        <article className="contextMenu" style={menuStyle} ref={contextMenu}>
+          <button ref={like}>
+            {isLike ? (
+              <AiFillLike
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsLike(!isLike);
+                }}
+                style={{ marginRight: "10px" }}
+              />
+            ) : (
+              <AiOutlineLike
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsLike(!isLike);
+                }}
+                style={{ marginRight: "10px" }}
+              />
+            )}
+            {isLike ? "Unlike" : "Like"}
           </button>
-          <button>tweet</button>
+          <button ref={tweet}>
+            <FaRetweet
+              onClick={(e) => {
+                e.preventDefault();
+                props.handlePostId(props.post.id);
+              }}
+              style={{ marginRight: "10px" }}
+            />
+            see tweet
+          </button>
         </article>
       )}
       {user.data.length >= 1 && image.data.length >= 1 && (
@@ -60,9 +110,9 @@ function PostCard(props) {
               </div>
               <button
                 onClick={(e) => {
-                  setMenuX(e.clientX);
-                  setMenuY(e.clientY);
-                  handleMenu(e);
+                  setMenuX(e.pageX);
+                  setMenuY(e.pageY);
+                  props.clickedMenu(props.post.id);
                 }}
                 ref={menu}
               >

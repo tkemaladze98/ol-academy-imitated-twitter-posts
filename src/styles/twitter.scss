@@ -47,19 +47,19 @@
       display: flex;
       justify-content: space-between;
       padding-right: 20px;
-      p{
+      p {
         cursor: pointer;
       }
-      .comment-p:hover{
+      .comment-p:hover {
         color: blue;
       }
-      .tweet-p:hover{
+      .tweet-p:hover {
         color: green;
       }
-      .like-p:hover{
+      .like-p:hover {
         color: red;
       }
-      .share-p:hover{
+      .share-p:hover {
         color: blue;
       }
     }
@@ -67,4 +67,48 @@
 }
 .main-div:hover {
   background-color: rgba(223, 216, 207, 0.3);
+}
+
+.contextMenu {
+  background-color: rgb(230, 230, 230);
+  min-width: 150px;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border: 1px dotted black;
+  button {
+    border: none;
+    border-bottom: 1px solid black;
+  }
+}
+
+.comment-section {
+  border: 1px dotted rgba(100, 100, 100, 0.3);
+  margin-top: 20px;
+  max-width: 674px;
+  background-color: white;
+}
+
+#twitter-main-div {
+  .arrow-back {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 10px;
+    left: 50px;
+    .arrow {
+      font-size: 30px;
+    }
+  }
+  .arrow-back:hover {
+    background-color: rgba(235, 201, 157, 0.5);
+  }
+}
+.all-posts {
+  background-color: white;
 }
