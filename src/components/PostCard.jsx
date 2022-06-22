@@ -10,7 +10,7 @@ import useFetchUserData from "../helpers/useFetchUserData";
 import useFetchImagesData from "../helpers/useFetchImagesData";
 
 function PostCard(props) {
-  const user = useFetchUserData(props.post.userId);
+  const userData = useFetchUserData(props.post.userId);
   const image = useFetchImagesData(props.post.id);
   const [menuClicked, setMenuClicked] = useState(false);
   const [isLike, setIsLike] = useState(false);
@@ -93,20 +93,20 @@ function PostCard(props) {
           </button>
         </article>
       )}
-      {user.data.length >= 1 && image.data.length >= 1 && (
+      {userData.data.length >= 1 && image.data.length >= 1 && (
         <div className="main-div">
           <div className="avatar">
             <p style={{ backgroundColor: `#${props.randomColor}` }}>
-              {user.data[0].name[0].toUpperCase()}
+              {userData.data[0].name[0].toUpperCase()}
             </p>
           </div>
           <div className="post">
             <div className="head-tittle">
               <div>
                 <p>
-                  {user.data[0].username} @{user.data[0].username}
+                  {userData.data[0].username} @{userData.data[0].username}
                 </p>
-                <p>{user.data[0].address.city}</p>
+                <p>{userData.data[0].address.city}</p>
               </div>
               <button
                 onClick={(e) => {

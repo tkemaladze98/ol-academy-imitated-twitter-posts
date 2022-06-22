@@ -9,7 +9,7 @@ import { IoArrowBackOutline } from "react-icons/io5";
 function Twitter() {
   const [clickedMenuId, setClickedMenuId] = useState("");
   const [postId, setPostId] = useState("");
-  const data = useFetchPostsData(postId);
+  const postData = useFetchPostsData(postId);
   const commentsData = useFetchPostComments(postId);
 
   const clickedMenu = (id) => {
@@ -22,8 +22,8 @@ function Twitter() {
 
   return (
     <div id="twitter-main-div">
-      {data.length > 1 &&
-        data.map((post) => {
+      {postData.length > 1 ? (
+        postData.map((post) => {
           return (
             <PostCard
               randomColor={Math.floor(Math.random() * 16777215).toString(16)}
@@ -34,12 +34,12 @@ function Twitter() {
               handlePostId={handlePostId}
             />
           );
-        })}
-      {typeof data === "object" && (
+        })
+      ) : (
         <PostCard
           randomColor={Math.floor(Math.random() * 16777215).toString(16)}
-          key={data.id}
-          post={data}
+          key={postData.id}
+          post={postData}
           clickedMenu={clickedMenu}
           clickedMenuId={clickedMenuId}
           handlePostId={handlePostId}
@@ -50,7 +50,13 @@ function Twitter() {
           {commentsData.map((comment) => {
             return (
               comment.postId === postId && (
-                <Comments randomColor={Math.floor(Math.random() * 16777215).toString(16)} comment={comment} key={comment.id} />
+                <Comments
+                  randomColor={Math.floor(Math.random() * 16777215).toString(
+                    16
+                  )}
+                  comment={comment}
+                  key={comment.id}
+                />
               )
             );
           })}
