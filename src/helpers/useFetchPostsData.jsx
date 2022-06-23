@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
+import useFetch from "./useFetch";
 
 function useFetchPostsData(id) {
-  const [data, setData] = useState([]);
+  const url =
+    id === null
+      ? "https://jsonplaceholder.typicode.com/posts/"
+      : "https://jsonplaceholder.typicode.com/posts/" + id;
 
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/posts/" + id)
-      .then((response) => response.json())
-      .then((json) => {
-        setData(json);
-      });
-  }, [id]);
+  const data = useFetch(url);
 
   return data;
 }

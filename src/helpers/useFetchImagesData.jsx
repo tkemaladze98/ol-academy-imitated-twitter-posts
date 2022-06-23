@@ -1,15 +1,9 @@
-import React, { useEffect, useState } from "react";
+import useFetch from "./useFetch";
 
 function useFetchImagesData(id) {
-  const [data, setData] = useState({});
+  const url = "https://jsonplaceholder.typicode.com/photos?id=" + id;
 
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/photos?id=" + id)
-      .then((response) => response.json())
-      .then((json) => {
-        setData(json);
-      });
-  }, []);
+  const  data  = useFetch(url);
 
   return { data };
 }

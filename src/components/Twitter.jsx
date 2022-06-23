@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import useFetchPostsData from "../helpers/useFetchPostsData";
 import useFetchPostComments from "../helpers/useFetchPostComments";
 import Comments from "./Comments";
@@ -7,8 +7,8 @@ import "../styles/twitter.scss";
 import { IoArrowBackOutline } from "react-icons/io5";
 
 function Twitter() {
-  const [clickedMenuId, setClickedMenuId] = useState("");
-  const [postId, setPostId] = useState("");
+  const [clickedMenuId, setClickedMenuId] = useState(null);
+  const [postId, setPostId] = useState(null);
   const postData = useFetchPostsData(postId);
   const commentsData = useFetchPostComments(postId);
 
@@ -26,7 +26,6 @@ function Twitter() {
         postData.map((post) => {
           return (
             <PostCard
-              randomColor={Math.floor(Math.random() * 16777215).toString(16)}
               key={post.id}
               post={post}
               clickedMenu={clickedMenu}
@@ -37,7 +36,6 @@ function Twitter() {
         })
       ) : (
         <PostCard
-          randomColor={Math.floor(Math.random() * 16777215).toString(16)}
           key={postData.id}
           post={postData}
           clickedMenu={clickedMenu}
@@ -45,25 +43,19 @@ function Twitter() {
           handlePostId={handlePostId}
         />
       )}
-      {commentsData.length >= 1 && postId !== "" && (
+      {commentsData.length >= 1 && postId !== null && (
         <div className="comment-section">
           {commentsData.map((comment) => {
             return (
               comment.postId === postId && (
-                <Comments
-                  randomColor={Math.floor(Math.random() * 16777215).toString(
-                    16
-                  )}
-                  comment={comment}
-                  key={comment.id}
-                />
+                <Comments comment={comment} key={comment.id} />
               )
             );
           })}
         </div>
       )}
-      {postId !== "" && (
-        <div className="arrow-back" onClick={() => setPostId("")}>
+      {postId !== null && (
+        <div className="arrow-back" onClick={() => setPostId(null)}>
           <IoArrowBackOutline className="arrow" />
         </div>
       )}

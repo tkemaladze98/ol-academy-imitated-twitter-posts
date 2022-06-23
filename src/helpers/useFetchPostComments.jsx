@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from "react";
+import useFetch from "./useFetch";
 
-function useFetchPostComments(id) {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/comments")
-      .then((response) => response.json())
-      .then((json) => {
-        setData(json);
-      });
-  }, [id]);
-  return data;
+function useFetchPostComments() {
+  const url = "https://jsonplaceholder.typicode.com/comments";
+
+  const data = useFetch(url);
+
+  return  data ;
 }
 
 export default useFetchPostComments;

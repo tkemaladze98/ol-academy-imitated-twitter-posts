@@ -1,15 +1,9 @@
-import React, { useEffect, useState } from "react";
+import useFetch from "./useFetch";
 
 function useFetchPostsData(id) {
-  const [data, setData] = useState({});
+  const url = "https://jsonplaceholder.typicode.com/users?id=" + id;
 
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users?id=" + id)
-      .then((response) => response.json())
-      .then((json) => {
-        setData(json);
-      });
-  }, []);
+  const data = useFetch(url);
 
   return { data };
 }
